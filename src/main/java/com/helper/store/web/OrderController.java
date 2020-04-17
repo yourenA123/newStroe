@@ -223,7 +223,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @PostMapping("selectNotice")
+    @PostMapping("/selectNotice")
     public JsonMessage selectNotice(HttpServletRequest request){
         JsonMessage result = new JsonMessage();
         Map<String, Object> data = new HashMap<String, Object>(16);
@@ -245,7 +245,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @PostMapping("updateRead")
+    @PostMapping("/updateRead")
     public JsonMessage updateRead(HttpServletRequest request){
         JsonMessage result = new JsonMessage();
         Map<String, Object> data = new HashMap<String, Object>(16);
@@ -286,11 +286,36 @@ public class OrderController {
     }
 
     /**
+     * 通过转移订单后的买家查找订单
+     * @param request
+     * @return
+     */
+    @PostMapping("/selectTransferbuy_user_id")
+    public JsonMessage selectTransferbuy_user_id(HttpServletRequest request){
+        JsonMessage result = new JsonMessage();
+        Map<String, Object> data = new HashMap<String, Object>(16);
+        Map<String, Object> param = ParamsUtils.getParmas(request);
+        try {
+            List<Map<String, Object>> orderList = orderService.selectTransferbuy_user_id(param);
+            data.put("orderList",orderList);
+            result.setResponseCode(Constants.RES_CODE_0);
+            result.setErrorMessage(Constants.RES_MESSAGE_0);
+            result.setData(data);
+        }catch (Exception e){
+
+            result.setResponseCode(Constants.RES_CODE_101);
+            result.setErrorMessage(Constants.RES_MESSAGE_101);
+        }
+        return result;
+    }
+
+
+    /**
      * 更新转让订单价格
      * @param request
      * @return
      */
-    @PostMapping("updatePrice")
+    @PostMapping("/updatePrice")
     public JsonMessage updatePrice(HttpServletRequest request){
         JsonMessage result = new JsonMessage();
         Map<String, Object> data = new HashMap<String, Object>(16);
@@ -312,7 +337,7 @@ public class OrderController {
      * @param request
      * @return
      */
-    @PostMapping("updateOrderBuyUserId")
+    @PostMapping("/updateOrderBuyUserId")
     public JsonMessage updateOrderBuyUserId(HttpServletRequest request){
         JsonMessage result = new JsonMessage();
         Map<String, Object> data = new HashMap<String, Object>(16);

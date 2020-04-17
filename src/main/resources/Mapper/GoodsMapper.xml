@@ -16,7 +16,7 @@
     <select id="selectSize" resultType="map">
         select * from (select price,`size`,gs_id,create_user from goods where shoe_id=#{shoeId} and is_sell=0
         GROUP BY `size`,price)r
-        group by `size`
+        group by `size`,price
   </select>
 
     <!-- 根据shoeId查找鞋信息 -->

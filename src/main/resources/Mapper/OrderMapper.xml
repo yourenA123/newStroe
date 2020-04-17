@@ -56,6 +56,13 @@
         where  order_id=#{orderId}
     </select>
 
+    <select id="getOrder_No" parameterType="map" resultType="map">
+        select order_no
+        from `order`
+        where order_id=#{orderId}
+
+    </select>
+
     <select id="getOrderByBuyorsellId" parameterType="map" resultType="map">
         select shoe.*,`order`.*,goods.size,address.address,address.user_name,address.phone
         from `order`,shoe,goods,address
@@ -144,13 +151,13 @@
 
     <update id="updateOrderBuyUserId" parameterType="map">
         update `order`
-        set transferbuy_user_id=#{transferBuyUserId},transfersell_user_id=#{transferSellUserId},transferprice=#{transferprice}
+        set transferbuy_user_id=#{transferBuyUserId},transfersell_user_id=#{transferSellUserId},transferprice=#{transferprice},status=5
         where order_id=#{orderId}
     </update>
 
     <update id="canceOrderBuyUserId" parameterType="map">
         update `order`
-        set transferbuy_user_id=0,transfersell_user_id=0,transferprice=0,status=5
+        set transferbuy_user_id=0,transfersell_user_id=0,transferprice=0,status=1
         where order_id=#{orderId}
     </update>
 
@@ -162,7 +169,7 @@
 
 
     <select id="selectUserInfo" parameterType="map" resultType="map">
-        SELECT nickname,phone,id from `user` where phone=#{phone}
+        SELECT nicheng,phone,id from `user` where phone=#{phone}
     </select>
 
     <update id="cancePrice" parameterType="map">
@@ -171,8 +178,12 @@
         where order_id=#{orderId}
     </update>
 
-
-
+    <select id="selectTransferbuy_user_id" parameterType="map" resultType="map">
+        SELECT shoe.*,`order`.*,goods.size,address.address,address.user_name,address.phone
+         from `order`,shoe,goods,address
+         where transferbuy_user_id=#{userId}
+         group by `order`.create_time desc
+    </select>
 
 
 

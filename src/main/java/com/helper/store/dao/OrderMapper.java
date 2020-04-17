@@ -23,6 +23,12 @@ public interface OrderMapper {
      */
     void saveOrder(Map<String,Object> param);
 
+    /**
+     * 获取订单号
+     * @param param
+     */
+    void getOrderNo(Map<String,Object> param);
+
 
 
     /**
@@ -160,6 +166,12 @@ public interface OrderMapper {
      * @param param
      */
     Map<String,Object> selectUserInfo(Map<String,Object>param);
+
+    /**
+     * 通过转移订单后的买家查找订单
+     * @param param
+     */
+    List<Map<String,Object>> selectTransferbuy_user_id(Map<String,Object> param);
 
     /**
      * 修改转让订单价格

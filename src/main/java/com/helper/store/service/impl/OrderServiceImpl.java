@@ -172,6 +172,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void getOrderNo(Map<String, Object> param) {
+        return;
+
+    }
+
+    @Override
     public void orderFinish(Map<String, Object> param) {
         orderMapper.orderFinish(param);
         orderMapper.sellUserBalance(param);
@@ -215,7 +221,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Map<String,Object> selectUserInfo(Map<String, Object> param) {
-       return orderMapper.selectUserInfo(param);
+
+        return orderMapper.selectUserInfo(param);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectTransferbuy_user_id(Map<String, Object> param) {
+        ParamsUtils.getUser("userId",param);
+        return orderMapper.selectTransferbuy_user_id(param);
     }
 
     @Override
